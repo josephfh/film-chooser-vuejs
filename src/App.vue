@@ -133,7 +133,7 @@ export default {
           this.films.push({
             genres: data.genres,
             id: id,
-            overview: this.shorten(data.overview, 250) + "...",
+            overview: this.shortenText(data.overview, 250) + "...",
             posterPath: data.poster_path,
             runtime: data.runtime,
             tagline: data.tagline,
@@ -141,9 +141,8 @@ export default {
             year: data.release_date.substring(0, 4)
           });
         })
-        .catch(error => {
-          this.error = "not found";
-          console.log(error);
+        .catch(() => {
+          this.error = "ID not found";
         });
     },
     deleteFilm(id) {
@@ -159,7 +158,7 @@ export default {
     clearPoints() {
       this.points = {};
     },
-    shorten(str, maxLen, separator = " ") {
+    shortenText(str, maxLen, separator = " ") {
       if (str.length <= maxLen) return str;
       return str.substr(0, str.lastIndexOf(separator, maxLen));
     }
